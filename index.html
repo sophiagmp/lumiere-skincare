@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumière Skincare – Hautanalyse</title>
+  <meta name="description" content="Mach den kostenlosen Lumière Hautanalyse-Quiz in 2 Minuten und erhalte deine persönliche Pflegeroutine – botanische Formulierungen, made in Würzburg.">
+  <meta property="og:title" content="Lumière Skincare – Deine persönliche Hautanalyse">
+  <meta property="og:description" content="6 Fragen, 2 Minuten, deine individuelle Pflegeempfehlung – kostenlos.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='%233F8F35'/%3E%3Cpath d='M12 3c-1.5 3-4 5.2-4 9a4 4 0 0 0 8 0c0-3.8-2.5-6-4-9z' fill='%23FCF9EF'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ANKÜNDIGUNGSLEISTE -->
+  <div class="announcement-bar" id="announcement-bar">
+    <div class="announcement-track" id="announcement-track">
+      <span class="announcement-item">Kostenlose Hautanalyse in nur 2 Minuten</span>
+      <span class="announcement-item">10% Rabatt auf deine erste Bestellung nach dem Test</span>
+      <span class="announcement-item">Botanische Formulierungen · Made in Würzburg</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <img src="Lumiere.png" alt="Lumière Logo" class="logo-img">
+        <span class="logo-text">Lumière Skincare</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#">Produkte</a>
+        <a href="#">Über uns</a>
+        <a href="#" class="nav-cta">Shop</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <img src="blume.png" alt="" class="hero-flower-deco" aria-hidden="true">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="hero-eyebrow">Persönliche Hautanalyse</p>
+        <h1 class="hero-headline">Deine Haut.<br>Deine Routine.</h1>
+        <p class="hero-sub">Beantworte 6 einfache Fragen und erhalte deine individuelle Pflegeempfehlung — kostenlos und in unter zwei Minuten.</p>
+        <button class="btn-hero" onclick="startQuiz()">Jetzt Hauttyp entdecken</button>
+        <p class="hero-meta">Bereits von 12.400 Personen genutzt · Kostenlos</p>
+      </div>
+      <div class="hero-illustration">
+        <video class="hero-video" autoplay muted loop playsinline>
+          <source src="hero-video.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <!-- Scroll hint -->
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <svg width="16" height="20" viewBox="0 0 16 20" fill="none"><path d="M8 2v16M3 13l5 5 5-5" stroke="#7A9E7E" stroke-width="1.2" stroke-linecap="round"/></svg>
+    </div>
+  </section>
+
+  <!-- STATISTIK-LEISTE -->
+  <section class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <span class="stat-number">12.400+</span>
+        <span class="stat-label">Analysen</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number">6</span>
+        <span class="stat-label">Fragen</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number">5</span>
+        <span class="stat-label">Hauttypen</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number">2 Min.</span>
+        <span class="stat-label">Dauer</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ SECTION -->
+  <section class="quiz-section hidden" id="quiz-section">
+    <div class="quiz-wrap">
+
+      <!-- Progress -->
+      <div class="progress-header">
+        <span class="progress-label" id="progress-label">Frage 1 von 6</span>
+        <span class="progress-pct" id="progress-pct">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+
+      <!-- Question card -->
+      <div class="question-card fade" id="question-card">
+        <img src="blume.png" alt="" class="q-card-flower" aria-hidden="true">
+        <div class="q-icon" id="q-icon"></div>
+        <p class="q-number" id="q-number">01</p>
+        <h2 class="q-text" id="q-text"></h2>
+        <button type="button" class="q-why-toggle" id="q-why-toggle" aria-expanded="false" onclick="toggleWhy()">Warum fragen wir das?</button>
+        <p class="q-why-text hidden" id="q-why-text"></p>
+        <div class="options" id="options"></div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="quiz-nav">
+        <button class="btn-back" id="btn-back" onclick="goBack()">← Zurück</button>
+        <button class="btn-next" id="btn-next" onclick="goNext()" disabled>Weiter →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULT SECTION -->
+  <section class="result-section hidden" id="result-section">
+    <div class="quiz-wrap">
+
+      <div class="result-logo">
+        <img src="blume.png" alt="" class="result-flower-deco" aria-hidden="true">
+        <p class="result-logo-claim">Skincare · Balance · Botanical</p>
+      </div>
+
+      <div class="result-top" id="result-top">
+        <p class="result-eyebrow">Dein Ergebnis</p>
+        <h2 class="result-type" id="result-type"></h2>
+        <p class="result-desc" id="result-desc"></p>
+      </div>
+
+      <div class="result-routine">
+        <h3>Deine empfohlene Routine</h3>
+        <div class="routine-steps">
+          <div class="routine-step">
+            <span class="step-time">Morgens</span>
+            <span class="step-text" id="routine-morning"></span>
+          </div>
+          <div class="routine-step">
+            <span class="step-time">Abends</span>
+            <span class="step-text" id="routine-evening"></span>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="products-label">Empfohlene Produkte</h3>
+      <div class="products-grid" id="products-grid"></div>
+
+      <!-- E-Mail Opt-in -->
+      <div class="email-optin">
+        <h3>Dein detailliertes Ergebnis per E-Mail erhalten</h3>
+        <p>Als Dankeschön schenken wir dir <strong>10% auf deine erste Bestellung</strong>.</p>
+        <div class="email-optin-form">
+          <label for="email-input" class="sr-only">E-Mail-Adresse</label>
+          <input type="email" id="email-input" placeholder="deine@email.de" oninput="checkEmail()">
+          <button class="btn-email-submit" id="btn-email-submit" onclick="submitEmail()" disabled>Senden</button>
+        </div>
+        <p class="email-hint" id="email-hint"></p>
+        <p class="email-legal">Kein Spam. Jederzeit abmeldbar. Daten werden nicht weitergegeben.</p>
+        <div class="save-status hidden" id="save-status">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#7A9E7E" stroke-width="1"/><path d="M5 8l2 2 4-4" stroke="#7A9E7E" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Gespeichert! Schau in dein Postfach.
+        </div>
+      </div>
+
+      <div class="result-cta">
+        <a href="https://lumiere-skincare.de/shop" class="btn-shop" target="_blank">Alle Produkte entdecken →</a>
+        <button class="btn-restart" onclick="restartQuiz()">Quiz neu starten</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
